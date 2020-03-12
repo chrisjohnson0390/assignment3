@@ -1,11 +1,12 @@
 package com.meritamerica.assignment3;
 
-class SavingsAccount {
+class SavingsAccount extends BankAccount {
 	private double balance;
 	private final double INTEREST_RATE = 0.01;
 	private long acountNumber;
 	
-	public SavingsAccount(double openBalance){
+	public SavingsAccount(double openBalance, double interestRate){
+		super(openBalance, interestRate);
 		this.balance = openBalance;
 		this.acountNumber = MeritBank.getNextAccountNumber();
 	}
@@ -52,5 +53,6 @@ class SavingsAccount {
 				"Savings Account Balance in 3 years: $" + futureValue(3);
 	
 	}
+	//Still need the readFromString
 
 }

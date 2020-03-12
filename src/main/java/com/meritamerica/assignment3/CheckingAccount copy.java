@@ -1,12 +1,13 @@
 package com.meritamerica.assignment3;
 
-class CheckingAccount {
+class CheckingAccount extends BankAccount {
 	
 	private double balance;
 	private final double INTEREST_RATE = 0.0001;
 	private long accountNumber;
 	
-	public CheckingAccount(double openBalance){
+	public CheckingAccount(double openBalance, double interestRate){
+	super(openBalance, interestRate ); 
 		this.balance = openBalance;
 		this.accountNumber = MeritBank.getNextAccountNumber();
 	}

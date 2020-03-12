@@ -1,12 +1,13 @@
 package com.meritamerica.assignment3;
 
-class AccountHolder {
+abstract class AccountHolder implements Comparable<AccountHolder> {
 	
 	// Class variables
 	private String firstName;
 	private String middleName;
 	private String lastName;
 	private String ssn;
+	private double interestRate;
 	CheckingAccount[] checkingArray = new CheckingAccount[0];
 	SavingsAccount[] savingsArray = new SavingsAccount[0];
 	CDAccount[] cdAccountArray = new CDAccount[0];
@@ -28,7 +29,7 @@ class AccountHolder {
 			return;
 		}
 		
-		CheckingAccount newA = new CheckingAccount(openBalance);
+		CheckingAccount newA = new CheckingAccount(openBalance,  interestRate);
 		CheckingAccount[] newCheckingArray = new CheckingAccount[checkingArray.length+1];
 		for (int i = 0; i < newCheckingArray.length-1; i++) {
 			newCheckingArray[i] = checkingArray[i];
@@ -71,8 +72,8 @@ class AccountHolder {
 		if(getCheckingBalance() + getSavingsBalance() + openBalance >= 250000) {
 			System.out.println("Cannot open a new Savings Account because aggregate balance of accounts is to high.");
 			return;
-		}
-			SavingsAccount newA = new SavingsAccount(openBalance);
+		}	//Interest Rate is being called inside Account Holder Class ?
+			SavingsAccount newA = new SavingsAccount(openBalance, interestRate);
 			SavingsAccount[] newSavingsArray = new SavingsAccount[savingsArray.length+1];
 			for (int i = 0; i < newSavingsArray.length-1; i++) {
 				newSavingsArray[i] = savingsArray[i];
@@ -196,5 +197,7 @@ class AccountHolder {
 	public int getNumberOfCheckingAccounts() {
 		return checkingArray.length;
 	}
+
+	
 	
 }
