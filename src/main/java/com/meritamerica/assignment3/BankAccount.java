@@ -1,12 +1,13 @@
 package com.meritamerica.assignment3;
 
-	import java.util.Date;
+	import java.text.ParseException;
+import java.util.Date;
 
 	public class BankAccount {
-	    private double balance;
-	    private double interestRate;
-	    private Date accountOpenedOn;
-	    long accountNumber;
+	    private static double balance;
+	    private static double interestRate;
+	    private static Date accountOpenedOn;
+	    static long  accountNumber;
 	
 	
 	    BankAccount(double balance, double interestRate) {
@@ -74,16 +75,29 @@ package com.meritamerica.assignment3;
 	        double futureVal = this.balance * Math.pow(1 + getInterestRate(), years);
 	        return futureVal;
 	    }
-	    /*static BankAccount readFromString (String accountData) {
-	    *try {
-	   * static BankAccount readFromString (String accountData) 
-	    	*throws ParseException 
-	    	*} catch ( java.lang.NumberFormatException e){
-	    		
-	    	*}
-	   * }
+	   
+	    public String writeToString() {
+	    	String accountData = "";
+	    	accountData += this.accountNumber + ",";
+	    	accountData+= this.accountOpenedOn + ",";
+	    	accountData+= this.balance + ",";
+	    	accountData+= this.interestRate + ",";
+	    	return accountData;
+	    }
 	    
-	    *String writeToString */
+	    //Overall goal: parse information from a string and create a new account with it.
+	    public static BankAccount readFromString(String accountData)throws ParseException, NumberFormatException {
+	    	//Define local variables  for the local variables. i.e. accountOpenedOn, accountNumber, etc.
+	    	long nAccountNumber = accountNumber;
+	    	Date nAccountOpenedOn = accountOpenedOn;
+	    	double nInterestRate = interestRate;
+	    	double nBalance = balance;
+	    	// Parse the string and identify each of the values
+	    		// Assign to each of the local values we Parse
+	    		// Throw exception - NumberFormatException
+	    	// Call bank account constructor, passing in those local variables. 
+	    	//Return new bank account.
+	    }
 	}
 
 

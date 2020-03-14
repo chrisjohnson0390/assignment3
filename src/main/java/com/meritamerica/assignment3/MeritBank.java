@@ -1,11 +1,17 @@
 package com.meritamerica.assignment3;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Arrays;
+
 class MeritBank {
 	
-	private static long nextAccountNumber;
+	private static long nextAccountNumber = 84920570;
 	private static AccountHolder AccountHoldersArray[] = new AccountHolder[0];
 	private static CDOffering CDOfferingsArray[] = new CDOffering[0];
-		
+	String fileName = "Account_Information.txt";	
 
 	public static void addAccountHolder(AccountHolder accountHolder) {
 		AccountHolder[] newAccountHolderArray = new AccountHolder[AccountHoldersArray.length+1];
@@ -66,7 +72,7 @@ class MeritBank {
 	}
 
 	public static long getNextAccountNumber() {
-		return nextAccountNumber += 1;
+		return nextAccountNumber;
 	}
 
 	public static double totalBalances() {
@@ -82,6 +88,41 @@ class MeritBank {
 	public static double futureValue(double presentValue, double interestRate, int term) {
 		double fValue = presentValue*Math.pow(1 + interestRate,  term);
 		return fValue;
+	}
+	
+	static boolean readFromFile( String fileName) {
+		try {
+			FileReader reader = new FileReader(fileName);
+			int character;
+			
+			while((character = reader.read()) !=-1) {
+				System.out.print((char)character);
+			}
+			reader.close();
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+	static boolean writeToFile( String fileName) {
+		try {
+			PrintWriter writer = new PrintWriter(fileName);
+			writer.println();//Pass in something
+			writer.close();
+		}
+		catch(FileNotFoundException e){
+			e.printStackTrace();
+		}
+		return true;
+	}
+	static AccountHolder[] sortAccountHolders() {
+		Arrays.sort(AccountHoldersArray);
+		return AccountHoldersArray;
+	}
+	static void setNextAccountNumber( long accountNumber) {
+		nextAccountNumber = accountNumber;
+		
 	}
 	
 

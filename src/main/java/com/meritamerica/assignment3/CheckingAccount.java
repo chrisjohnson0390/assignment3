@@ -54,4 +54,5 @@ class CheckingAccount extends BankAccount {
 				"Checking Account Balance in 3 years: $" + futureValue(3);
 		
 	}
+	//Still need the readFromString
 }

@@ -1,5 +1,5 @@
 package com.meritamerica.assignment3;
-
+//Comeback and double check if implements is needed
 abstract class AccountHolder implements Comparable<AccountHolder> {
 	
 	// Class variables
@@ -156,6 +156,12 @@ abstract class AccountHolder implements Comparable<AccountHolder> {
 
 	public double getCombinedBalance() {
 		return getCDBalance() + getSavingsBalance() + getCheckingBalance();
+	}
+	@Override
+	public int  compareTo(AccountHolder account) {
+		int sum1 = (int) getCombinedBalance();
+		int sum2 = (int) account.getCombinedBalance();
+		return sum1 - sum2;
 	}
 	
 	public String getFirstName() {

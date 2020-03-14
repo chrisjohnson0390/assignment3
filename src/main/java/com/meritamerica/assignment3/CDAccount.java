@@ -2,7 +2,7 @@ package com.meritamerica.assignment3;
 
 import java.util.Date;
 
-class CDAccount {
+class CDAccount extends BankAccount {
 	
 	CDOffering offering;
 	Date date;
@@ -10,6 +10,7 @@ class CDAccount {
 	private long accountNumber;
 		
 	public CDAccount(CDOffering offering, double openBalance){
+		super(offering, openBalance);
 		this.date = new Date();
 		this.offering = offering;
 		this.balance = openBalance;
@@ -39,5 +40,14 @@ class CDAccount {
 	public double futureValue() {
 		return balance*Math.pow(1 + getInterestRate(), getTerm());
 	}
+	@Override
+	 public boolean withdraw(double amount) {
+        return false;
+        }
+    
+    public boolean deposit(double amount) {
+     return false;
+    }
+    //Still need the readFromString and Override writeToString
 
 }
