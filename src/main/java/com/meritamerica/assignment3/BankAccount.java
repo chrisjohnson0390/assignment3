@@ -1,9 +1,7 @@
 package com.meritamerica.assignment3;
-import java.io.BufferedReader;
 import java.text.ParseException;
-import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.lang.NumberFormatException;
+import java.util.Date;
 
 	public class BankAccount {
 	    private static double balance;
@@ -48,7 +46,7 @@ import java.lang.NumberFormatException;
 	        return interestRate;
 	    }
 
-	    public java.util.Date getAccountOpenedOn() {
+	    public java.util.Date getOpenedOn() {
 	        return accountOpenedOn;
 	    }
 
@@ -86,7 +84,7 @@ import java.lang.NumberFormatException;
 	        double futureVal = this.balance * Math.pow(1 + getInterestRate(), years);
 	        return futureVal;
 	    }
-	   
+	    
 	    public String writeToString() {
 	    	StringBuilder accountData = new StringBuilder();
 	    	accountData.append(accountNumber).append(",");

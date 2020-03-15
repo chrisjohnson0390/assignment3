@@ -1,11 +1,9 @@
 package com.meritamerica.assignment3;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 //Comeback and double check if implements is needed
- class AccountHolder  {
+ public class AccountHolder implements Comparable<AccountHolder>  {
 	
 	// Class variables
 	private String firstName;
@@ -28,28 +26,29 @@ import java.util.Date;
 	// Method to add a checking account to an account holder
 	// Validates that aggregate account balances are less than $250,000.00
 	// Takes an opening balance parameter
-	public void addCheckingAccount(double openBalance) {
+	public CheckingAccount addCheckingAccount(double openBalance) {
 		if(getCheckingBalance() + getSavingsBalance() + openBalance >= 250000) {
 			System.out.println("Cannot open a new Checking Account because aggregate balance of accounts is to high.");
-			return;
+			return null;
 		}
 		
-		CheckingAccount newA = new CheckingAccount(openBalance,  interestRate);
+		CheckingAccount newA = new CheckingAccount(openBalance, interestRate);
 		CheckingAccount[] newCheckingArray = new CheckingAccount[checkingArray.length+1];
-		for (int i = 0; i < newCheckingArray.length-1; i++) {
+		for (int i = 0; i < newCheckingArray.length - 1; i++) {
 			newCheckingArray[i] = checkingArray[i];
 		}
 		checkingArray = newCheckingArray;
 		checkingArray[checkingArray.length-1] = newA;
+		return newA;
 	}
 
 
 	// Method to add checking account to an account holder
 	// Validates that aggregate account balances are less than $250,000.00		
-	public void addCheckingAccount(CheckingAccount checkingAccount) {
+	public CheckingAccount addCheckingAccount(CheckingAccount checkingAccount) {
 		if(checkingAccount.getBalance() + getCheckingBalance() + getSavingsBalance() >= 250000) {
 			System.out.println("Cannot open a new Checking Account because aggregate balance of accounts is to high.");
-			return;
+			return null;
 		}
 			CheckingAccount[] newCheckingArray = new CheckingAccount[checkingArray.length+1];
 			for (int i = 0; i < newCheckingArray.length-1; i++) {
@@ -57,6 +56,7 @@ import java.util.Date;
 			    }
 			checkingArray = newCheckingArray;
 			checkingArray[checkingArray.length-1] = checkingAccount;
+			return checkingAccount;
 	}
 	
 
@@ -73,10 +73,10 @@ import java.util.Date;
 	// Method for adding savings account to account holder
 	// Validates that aggregate account balance is less than $250,000
 	// Takes and opening balance as a parameter
-	public void addSavingsAccount(double openBalance) {
+	public SavingsAccount addSavingsAccount(double openBalance) {
 		if(getCheckingBalance() + getSavingsBalance() + openBalance >= 250000) {
 			System.out.println("Cannot open a new Savings Account because aggregate balance of accounts is to high.");
-			return;
+			return null;
 		}	//Interest Rate is being called inside Account Holder Class ?
 			SavingsAccount newA = new SavingsAccount(openBalance, interestRate);
 			SavingsAccount[] newSavingsArray = new SavingsAccount[savingsArray.length+1];
@@ -85,15 +85,16 @@ import java.util.Date;
 			}
 			savingsArray = newSavingsArray;
 			savingsArray[savingsArray.length-1] = newA;
+			return newA;
 	}
 	
 
 	// Method for adding savings account to account holder
 	// Validates aggregate account balance is less than $250,000
-	public void addSavingsAccount(SavingsAccount savingsAccount) {
+	public SavingsAccount addSavingsAccount(SavingsAccount savingsAccount) {
 		if(savingsAccount.getBalance() + getCheckingBalance() + getSavingsBalance() >= 250000) {
 			System.out.println("Cannot open a new Savings Account because aggregate balance of accounts is to high.");
-			return;
+			return null;
 		}
 			SavingsAccount[] newSavingsArray = new SavingsAccount[savingsArray.length+1];
 			for (int i = 0; i < newSavingsArray.length-1; i++) {
@@ -101,6 +102,7 @@ import java.util.Date;
 			    }
 			savingsArray = newSavingsArray;
 			savingsArray[savingsArray.length-1] = savingsAccount;
+			return savingsAccount;
 	}
 	
 	// Returns a savings account
@@ -124,7 +126,7 @@ import java.util.Date;
 	}
 
 	// Adds a CDAccount to the account holder	
-	public void addCDAccount(CDOffering offering, double openBalance) {
+	public CDAccount addCDAccount(CDOffering offering, double openBalance) {
 			CDAccount newA = new CDAccount(offering, openBalance);
 			CDAccount[] newCDArray = new CDAccount[cdAccountArray.length+1];
 			for (int i = 0; i < newCDArray.length-1; i++) {
@@ -132,15 +134,17 @@ import java.util.Date;
 			}
 			cdAccountArray = newCDArray;
 			cdAccountArray[cdAccountArray.length-1] = newA;
+			return newA;
 	}
 	
-	public void addCDAccount(CDAccount cdAccount) {
+	public CDAccount addCDAccount(CDAccount cdAccount) {
 			CDAccount[] newCDArray = new CDAccount[cdAccountArray.length+1];
 			for (int i = 0; i < newCDArray.length-1; i++) {
 			       newCDArray[i] = cdAccountArray[i];
 			    }
 			cdAccountArray = newCDArray;
 			cdAccountArray[cdAccountArray.length-1] = cdAccount;
+			return cdAccount;
 	}
 
 	public CDAccount[] getCDAccounts() {
@@ -162,10 +166,14 @@ import java.util.Date;
 	public double getCombinedBalance() {
 		return getCDBalance() + getSavingsBalance() + getCheckingBalance();
 	}
-	public int  compareTo(AccountHolder account) {
-		int sum1 = (int) getCombinedBalance();
-		int sum2 = (int) account.getCombinedBalance();
-		return sum1 - sum2;
+	@Override
+	public int compareTo(AccountHolder account) {
+		if(this.getCombinedBalance() > account.getCombinedBalance()) {
+			return 1;
+		} else {
+			return -1;
+		}
+		
 	}
 	
 	public String getFirstName() {
@@ -215,13 +223,14 @@ import java.util.Date;
     	accountHolderData.append(ssn);
     	return accountHolderData.toString();
     }
-	 public static AccountHolder readFromString(String accountHolderData)throws NumberFormatException {
-	    	try {
-	    		String [] holding = accountHolderData.split(",");
-	    		//[0] is firstName, [1] is middleName, [2] is lastName, [3] is SSN
-	    		AccountHolder newAcctHLD = new AccountHolder(String.valueOf(holding[0]),String.valueOf(holding[1]),
-	    				String.valueOf(holding[2]),String.valueOf(holding[3]));
-	    		return newAcctHLD;
+	
+	public static AccountHolder readFromString(String accountHolderData)throws NumberFormatException {
+	    try {
+	    	String [] holding = accountHolderData.split(",");
+	    	//[0] is firstName, [1] is middleName, [2] is lastName, [3] is SSN
+	    	//AccountHolder newAcctHLD = new AccountHolder(String.valueOf(holding[0]),String.valueOf(holding[1]),String.valueOf(holding[2]),String.valueOf(holding[3]));
+	    	AccountHolder newAcctHLD = new AccountHolder(holding[0],holding[1],holding[2],holding[3]);
+	    	return newAcctHLD;
 	    		
 	   
 	    	}
@@ -230,9 +239,6 @@ import java.util.Date;
 	    		return null;
 	    	}
 			
-	    }
-	
-
-	
-	
+	}
+		
 }

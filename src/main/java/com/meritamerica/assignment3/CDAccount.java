@@ -1,9 +1,8 @@
 package com.meritamerica.assignment3;
 
-import java.util.Date;
-import java.io.BufferedReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 class CDAccount extends BankAccount {
 	
 	CDOffering offering;
@@ -53,17 +52,18 @@ class CDAccount extends BankAccount {
 	}
 	
 	public double futureValue() {
-		return balance*Math.pow(1 + getInterestRate(), getTerm());
+		return futureValue(term);
 	}
+	
 	@Override
-	 public boolean withdraw(double amount) {
+	public boolean withdraw(double amount) {
         return false;
         }
     
     public boolean deposit(double amount) {
      return false;
     }
-    //Still need the readFromString and Override writeToString
+    
     public static CDAccount readFromString(String CDAccountData)throws ParseException, NumberFormatException {
     	
     	try {

@@ -14,7 +14,9 @@ class MeritBank {
 	private static long nextAccountNumber = 84920570;
 	private static AccountHolder AccountHoldersArray[] = new AccountHolder[0];
 	private static CDOffering CDOfferingsArray[] = new CDOffering[0];
-	String fileName = "src/Main/MeritBank.txt";	
+	//String fileName = "src/Main/MeritBank.txt";
+	//String fileName = "src/test/testMeritBank_bad.txt";
+	//String fileName = "src/test/testMeritBank_good.txt";
 
 	public static void addAccountHolder(AccountHolder accountHolder) {
 		AccountHolder[] newAccountHolderArray = new AccountHolder[AccountHoldersArray.length+1];
@@ -105,8 +107,8 @@ class MeritBank {
 			int holdOfferNum = Integer.valueOf(bufferedReader.readLine());
 			
 			for(int i = 0; i < holdOfferNum; i++) {
-			offering = Arrays.copyOf(offering, offering.length + 1);
-			offering [offering.length-1] = CDOffering.readFromString(bufferedReader.readLine());
+				offering = Arrays.copyOf(offering, offering.length + 1);
+				offering [offering.length-1] = CDOffering.readFromString(bufferedReader.readLine());
 			}
 			int numOfAcctHld = Integer.valueOf(bufferedReader.readLine());
 			
