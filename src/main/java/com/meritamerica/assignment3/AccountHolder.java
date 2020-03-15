@@ -45,19 +45,26 @@ package com.meritamerica.assignment3;
 
 	// Method to add checking account to an account holder
 	// Validates that aggregate account balances are less than $250,000.00		
-	public CheckingAccount addCheckingAccount(CheckingAccount checkingAccount) {
+	public boolean addCheckingAccount(CheckingAccount checkingAccount) {
+		try {
 		if(checkingAccount.getBalance() + getCheckingBalance() + getSavingsBalance() >= 250000) {
 			System.out.println("Cannot open a new Checking Account because aggregate balance of accounts is to high.");
-			return null;
-		}
+			return false;
+	
+			}
 			CheckingAccount[] newCheckingArray = new CheckingAccount[checkingArray.length+1];
 			for (int i = 0; i < newCheckingArray.length-1; i++) {
 			       newCheckingArray[i] = checkingArray[i];
 			    }
 			checkingArray = newCheckingArray;
 			checkingArray[checkingArray.length-1] = checkingAccount;
-			return checkingAccount;
+			return checkingAccount != null;
 	}
+		catch(NullPointerException e) {
+    		e.printStackTrace();
+    		return null != null;
+    	}
+	}	
 	
 
 	// Method for finding aggregate balance of checking accounts
@@ -224,7 +231,7 @@ package com.meritamerica.assignment3;
     	return accountHolderData.toString();
     }
 	
-	public static AccountHolder readFromString(String accountHolderData)throws NumberFormatException {
+	/*public static AccountHolder readFromString(String accountHolderData)throws NumberFormatException {
 	    try {
 	    	String [] holding = accountHolderData.split(",");
 	    	//[0] is firstName, [1] is middleName, [2] is lastName, [3] is SSN
@@ -239,6 +246,15 @@ package com.meritamerica.assignment3;
 	    		return null;
 	    	}
 			
-	}
+	}*/
+	 public static AccountHolder readFromString(String accountHolderData) {
+	    	String[] data = accountHolderData.split(",");
+	    	String firstName = data[0];
+	    	String middleName = data[1];
+	    	String lastName = data[2];
+	    	String ssn = data[3];
+	    	
+	    	return new AccountHolder(firstName, middleName, lastName, ssn);
+	    }
 		
 }

@@ -187,11 +187,13 @@ class MeritBank {
 							bufferedWriter.newLine();
 					}			
 			}
+			writer.close();
 			return true;
 		}
 		catch (Exception e) {
 			return false;
 		}
+	
 	}
 	static AccountHolder[] sortAccountHolders() {
 		Arrays.sort(AccountHoldersArray);

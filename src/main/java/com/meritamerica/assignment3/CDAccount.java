@@ -66,7 +66,7 @@ class CDAccount extends BankAccount {
     
     public static CDAccount readFromString(String CDAccountData)throws ParseException, NumberFormatException {
     	
-    	try {
+    	//try {
     		String [] holding = CDAccountData.split(",");
     		Date date = new SimpleDateFormat("dd/mm/yyyy").parse(holding[3]);
     		//[0] is accountNumber, [1] is balance, [2] is interestRate, date is [3] which is SimpleDate, [4] is term
@@ -74,15 +74,15 @@ class CDAccount extends BankAccount {
     				date, Integer.valueOf(holding[4]));
     		return newCDAcct;
     		
-    	}
-    	catch(ParseException  e) {
+    	//}
+    	/*catch(ParseException  e) {
     		e.printStackTrace();
     		return null;
     	}
     	catch(NumberFormatException e) {
     		e.printStackTrace();
     		return null;
-    	}
+    	}*/
     	
 		
     }

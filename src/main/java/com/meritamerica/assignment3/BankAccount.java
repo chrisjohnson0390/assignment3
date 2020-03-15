@@ -3,14 +3,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-	public class BankAccount {
+	public  class  BankAccount {
 	    private static double balance;
 	    private static double interestRate;
 	    private static Date accountOpenedOn;
 	    static long  accountNumber;
 	
 	
-	    BankAccount(double balance, double interestRate) {
+	    public BankAccount(double balance, double interestRate) {
 	        this.balance = balance;
 	        this.interestRate = interestRate;
 	        this.accountOpenedOn = null;
@@ -22,7 +22,7 @@ import java.util.Date;
 	    	this.accountOpenedOn = accountOpenedOn;
 	    }
 	    
-	    BankAccount(long accountNumber, double balance, double interestRate, 
+	   public BankAccount(long accountNumber, double balance, double interestRate, 
 	    		java.util.Date accountOpenedOn){
 	    	this.accountNumber = accountNumber;
 	    	this.balance = balance;
@@ -96,17 +96,6 @@ import java.util.Date;
 	    
 	    //Overall goal: parse information from a string and create a new account with it.
 	    public static BankAccount readFromString(String accountData)throws ParseException, NumberFormatException {
-	    	/*Define local variables  for the local variables. i.e. accountOpenedOn, accountNumber, etc.
-	    	*long nAccountNumber = accountNumber;
-	    	*Date nAccountOpenedOn = accountOpenedOn;
-	    	*double nInterestRate = interestRate;
-	    	*double nBalance = balance;
-	    	* Parse the string and identify each of the values
-	    		* Assign to each of the local values we Parse
-	    		* Throw exception - NumberFormatException
-	    	* Call bank account constructor, passing in those local variables. 
-	    	*Return new bank account. */
-	    	
 	    	try {
 	    		String [] holding = accountData.split(",");
 	    		Date date = new SimpleDateFormat("dd/mm/yyyy").parse(holding[3]);

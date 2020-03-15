@@ -1,8 +1,9 @@
 package com.meritamerica.assignment3;
-import java.io.BufferedReader;
+//import java.io.BufferedReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+//import java.lang.ArrayIndexOutOfBoundsException;
 class CheckingAccount extends BankAccount {
 	
 	private double balance;
@@ -62,15 +63,24 @@ class CheckingAccount extends BankAccount {
 		
 	}
 	//Still need the readFromString
-	public static CheckingAccount readFromString(String checkingAcctData)throws ParseException, NumberFormatException {
-    	try {
+	public static CheckingAccount readFromString(String checkingAcctData)throws ParseException//, NumberFormatException//, ArrayIndexOutOfBoundsException// 
+	{
+    	//try {
     		String [] holding = checkingAcctData.split(",");
-    		Date date = new SimpleDateFormat("dd/mm/yyyy").parse(holding[3]);
+    		SimpleDateFormat date = new SimpleDateFormat("dd/mm/yyyy");//.parse(holding[3]);
     		//[0] is accountNumber, [1] is balance, [2] is interestRate, date is [3] which is SimpleDate
-    		CheckingAccount newCheckAcct = new CheckingAccount(Long.valueOf(holding[0]),Double.valueOf(holding[1]),Double.valueOf(holding[2]),date);
-    		return newCheckAcct;
+    		//CheckingAccount newCheckAcct = new CheckingAccount(Long.valueOf(holding[0]),Double.valueOf(holding[1]),
+    			//	Double.valueOf(holding[2]),date);
+    		
+    		long accountNumber = Long.parseLong(holding[0]);
+    		double balance = Double.parseDouble(holding[1]);
+    		double interestRate = Double.parseDouble(holding[2]);
+    		Date accountOpenedOn = date.parse(holding[3]);
+    		
+    		return new CheckingAccount(accountNumber, interestRate, interestRate, accountOpenedOn) ;
+    		
     	}
-    	catch(ParseException  e) {
+    	/*catch(ParseException  e) {
     		e.printStackTrace();
     		return null;
     	}
@@ -78,8 +88,16 @@ class CheckingAccount extends BankAccount {
     		e.printStackTrace();
     		return null;
     	}
+    	catch(ArrayIndexOutOfBoundsException e) {
+    		e.printStackTrace();
+    		return null;
+    	}
+    	/*catch(NullPointerException e) {
+    		e.printStackTrace();
+    		return null;
+    	}*/
 	}
 	
-}
+//}
 	
     	
