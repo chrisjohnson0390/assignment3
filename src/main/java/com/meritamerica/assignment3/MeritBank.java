@@ -100,7 +100,7 @@ class MeritBank {
 		setNextAccountNumber(0);
 		//AccountHolder holder[] = new AccountHolder[0];
 		
-		try {
+	try {
 			FileReader reader = new FileReader (fileName);
 			BufferedReader bufferedReader = new BufferedReader(reader);
 			setNextAccountNumber(Long.valueOf(bufferedReader.readLine()));
@@ -149,7 +149,7 @@ class MeritBank {
 		}
 		
 	}
-	static boolean writeToFile( String fileName) {
+	static boolean writeToFile( String fileName)  {
 		try {
 		FileWriter writer = new FileWriter(fileName);
 		BufferedWriter bufferedWriter = new BufferedWriter ( writer);

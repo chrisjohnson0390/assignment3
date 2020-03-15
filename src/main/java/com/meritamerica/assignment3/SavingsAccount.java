@@ -62,9 +62,9 @@ class SavingsAccount extends BankAccount {
 	}
 	//Still need the readFromString
 	
-	public static SavingsAccount readFromString(String savingsAcctData)throws ParseException, NumberFormatException {
+	public static SavingsAccount readFromString(String accountData)throws ParseException, NumberFormatException {
     	//try {
-    		String [] holding = savingsAcctData.split(",");
+    		String [] holding = accountData.split(",");
     		SimpleDateFormat date = new SimpleDateFormat("dd/mm/yyyy");//.parse(holding[3]);
     		//[0] is accountNumber, [1] is balance, [2] is interestRate, date is [3] which is SimpleDate
     		//SavingsAccount newSaveAcct = new SavingsAccount;//(Long.valueOf(holding[0]),Double.valueOf(holding[1]),Double.valueOf(holding[2]), date);

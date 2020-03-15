@@ -63,10 +63,10 @@ class CheckingAccount extends BankAccount {
 		
 	}
 	//Still need the readFromString
-	public static CheckingAccount readFromString(String checkingAcctData)throws ParseException//, NumberFormatException//, ArrayIndexOutOfBoundsException// 
+	public static CheckingAccount readFromString(String accountData)throws ParseException//, NumberFormatException//, ArrayIndexOutOfBoundsException// 
 	{
     	//try {
-    		String [] holding = checkingAcctData.split(",");
+    		String [] holding = accountData.split(",");
     		SimpleDateFormat date = new SimpleDateFormat("dd/mm/yyyy");//.parse(holding[3]);
     		//[0] is accountNumber, [1] is balance, [2] is interestRate, date is [3] which is SimpleDate
     		//CheckingAccount newCheckAcct = new CheckingAccount(Long.valueOf(holding[0]),Double.valueOf(holding[1]),
