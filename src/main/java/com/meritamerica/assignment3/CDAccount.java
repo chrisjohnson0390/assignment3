@@ -26,7 +26,7 @@ class CDAccount extends BankAccount {
 		this.term = offering.getTerm();
 	}
 	
-	public CDAccount(long accountNumber, double balance, double interestRate,java.util.Date accountOpenedOn, int term) {
+	public CDAccount(long accountNumber, double balance, double interestRate,Date accountOpenedOn, int term) {
 		super(accountNumber, balance,interestRate,accountOpenedOn);
 		this.term = term;
 	}
@@ -43,7 +43,7 @@ class CDAccount extends BankAccount {
 		return offering.getTerm();
 	}
 	
-	public java.util.Date getStartDate(){
+	public Date getStartDate(){
 		return date;
 	}
 	
@@ -68,11 +68,17 @@ class CDAccount extends BankAccount {
     	
     	//try {
     		String [] holding = CDAccountData.split(",");
-    		Date date = new SimpleDateFormat("dd/mm/yyyy").parse(holding[3]);
+    		SimpleDateFormat date = new SimpleDateFormat("dd/mm/yyyy");//.parse(holding[3]);
     		//[0] is accountNumber, [1] is balance, [2] is interestRate, date is [3] which is SimpleDate, [4] is term
-    		CDAccount newCDAcct = new CDAccount(Long.valueOf(holding[0]),Double.valueOf(holding[1]),Double.valueOf(holding[2]),
-    				date, Integer.valueOf(holding[4]));
-    		return newCDAcct;
+    		//CDAccount newCDAcct = new CDAccount(Long.valueOf(holding[0]),Double.valueOf(holding[1]),Double.valueOf(holding[2]),
+    			//	date, Integer.valueOf(holding[4]));
+    		
+    		long accountNumber = Long.parseLong(holding[0]);
+    		double balance = Double.parseDouble(holding[1]);
+    		double interestRate = Double.parseDouble(holding[2]);
+    		Date accountOpenedOn = date.parse(holding[3]);
+    		int term = Integer.parseInt(holding[4]);
+    		return new CDAccount(accountNumber,balance,interestRate,accountOpenedOn,term);
     		
     	//}
     	/*catch(ParseException  e) {

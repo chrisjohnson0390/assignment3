@@ -32,9 +32,9 @@ class CDOffering {
     		CDOffering CDOff = new CDOffering(term, intRate);
     		return CDOff;*/
     		static CDOffering readFromString(String cdOfferingData) {
-    			String[] data = cdOfferingData.split(",");
-    			int term = Integer.parseInt(data[0]);
-    			double interestRate = Double.parseDouble(data[1]);
+    			String[] holding = cdOfferingData.split(",");
+    			int term = Integer.parseInt(holding[0]);
+    			double interestRate = Double.parseDouble(holding[1]);
     			
     			return new CDOffering(term, interestRate);
     		}
