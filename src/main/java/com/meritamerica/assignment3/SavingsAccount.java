@@ -1,5 +1,8 @@
 package com.meritamerica.assignment3;
-
+import java.io.BufferedReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 class SavingsAccount extends BankAccount {
 	private double balance;
 	private final double INTEREST_RATE = 0.01;
@@ -9,6 +12,10 @@ class SavingsAccount extends BankAccount {
 		super(openBalance, interestRate);
 		this.balance = openBalance;
 		this.acountNumber = MeritBank.getNextAccountNumber();
+	}
+	
+	public SavingsAccount ( long accountNumber, double openBalance, double interestRate, Date accountOpenedOn) {
+		super(accountNumber, openBalance, interestRate, accountOpenedOn);
 	}
 	
 	public double getBalance() {
@@ -23,7 +30,7 @@ class SavingsAccount extends BankAccount {
 		return acountNumber;
 	}
 	
-	public boolean withdraw(double amount) {
+	/*public boolean withdraw(double amount) {
 		if(amount <= balance && amount > 0) {
 			this.balance = balance - amount;
 			System.out.println("Withdrawn amount: $" + amount);
@@ -31,7 +38,7 @@ class SavingsAccount extends BankAccount {
 			return true;
 		}
 		return false;
-	}
+	}*/
 	
 	public boolean deposit(double amount) {
 		if (amount > 0) {
@@ -54,5 +61,23 @@ class SavingsAccount extends BankAccount {
 	
 	}
 	//Still need the readFromString
+	
+	public static SavingsAccount readFromString(String savingsAcctData)throws ParseException, NumberFormatException {
+    	try {
+    		String [] holding = savingsAcctData.split(",");
+    		Date date = new SimpleDateFormat("dd/mm/yyyy").parse(holding[3]);
+    		//[0] is accountNumber, [1] is balance, [2] is interestRate, date is [3] which is SimpleDate
+    		SavingsAccount newSaveAcct = new SavingsAccount(Long.valueOf(holding[0]),Double.valueOf(holding[1]),Double.valueOf(holding[2]),date);
+    		return newSaveAcct;
+    	}
+    	catch(ParseException  e) {
+    		e.printStackTrace();
+    		return null;
+    	}
+    	catch(NumberFormatException e) {
+    		e.printStackTrace();
+    		return null;
+    	}
 
+}
 }

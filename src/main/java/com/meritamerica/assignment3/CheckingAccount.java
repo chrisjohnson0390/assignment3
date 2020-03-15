@@ -1,5 +1,8 @@
 package com.meritamerica.assignment3;
-
+import java.io.BufferedReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 class CheckingAccount extends BankAccount {
 	
 	private double balance;
@@ -10,6 +13,10 @@ class CheckingAccount extends BankAccount {
 	super(openBalance, interestRate ); 
 		this.balance = openBalance;
 		this.accountNumber = MeritBank.getNextAccountNumber();
+	}
+	
+	public CheckingAccount ( long accountNumber, double openBalance, double interestRate, Date accountOpenedOn) {
+		super(accountNumber, openBalance, interestRate, accountOpenedOn);
 	}
 
 	public boolean withdraw(double amount) {
@@ -55,4 +62,24 @@ class CheckingAccount extends BankAccount {
 		
 	}
 	//Still need the readFromString
+	public static CheckingAccount readFromString(String checkingAcctData)throws ParseException, NumberFormatException {
+    	try {
+    		String [] holding = checkingAcctData.split(",");
+    		Date date = new SimpleDateFormat("dd/mm/yyyy").parse(holding[3]);
+    		//[0] is accountNumber, [1] is balance, [2] is interestRate, date is [3] which is SimpleDate
+    		CheckingAccount newCheckAcct = new CheckingAccount(Long.valueOf(holding[0]),Double.valueOf(holding[1]),Double.valueOf(holding[2]),date);
+    		return newCheckAcct;
+    	}
+    	catch(ParseException  e) {
+    		e.printStackTrace();
+    		return null;
+    	}
+    	catch(NumberFormatException e) {
+    		e.printStackTrace();
+    		return null;
+    	}
+	}
+	
 }
+	
+    	

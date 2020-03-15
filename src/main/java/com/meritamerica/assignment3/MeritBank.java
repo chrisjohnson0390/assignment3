@@ -1,17 +1,20 @@
 package com.meritamerica.assignment3;
 
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.Arrays;
-
+import java.io.BufferedReader;
 class MeritBank {
 	
 	private static long nextAccountNumber = 84920570;
 	private static AccountHolder AccountHoldersArray[] = new AccountHolder[0];
 	private static CDOffering CDOfferingsArray[] = new CDOffering[0];
-	String fileName = "Account_Information.txt";	
+	String fileName = "src/Main/MeritBank.txt";	
 
 	public static void addAccountHolder(AccountHolder accountHolder) {
 		AccountHolder[] newAccountHolderArray = new AccountHolder[AccountHoldersArray.length+1];
@@ -91,30 +94,102 @@ class MeritBank {
 	}
 	
 	static boolean readFromFile( String fileName) {
+		CDOffering offering[] = new CDOffering[0];
+		setNextAccountNumber(0);
+		//AccountHolder holder[] = new AccountHolder[0];
+		
 		try {
-			FileReader reader = new FileReader(fileName);
-			int character;
+			FileReader reader = new FileReader (fileName);
+			BufferedReader bufferedReader = new BufferedReader(reader);
+			setNextAccountNumber(Long.valueOf(bufferedReader.readLine()));
+			int holdOfferNum = Integer.valueOf(bufferedReader.readLine());
 			
-			while((character = reader.read()) !=-1) {
-				System.out.print((char)character);
+			for(int i = 0; i < holdOfferNum; i++) {
+			offering = Arrays.copyOf(offering, offering.length + 1);
+			offering [offering.length-1] = CDOffering.readFromString(bufferedReader.readLine());
+			}
+			int numOfAcctHld = Integer.valueOf(bufferedReader.readLine());
+			
+			for(int i = 0; i<numOfAcctHld; i++) {
+				//holder = Arrays.copyOf(holder, holder.length +1);
+				//holder [holder.length -1] = AccountHolder.readFromString(bufferedReader.readLine());
+				
+				AccountHolder acctH = AccountHolder.readFromString(bufferedReader.readLine());
+				int numOfChecking = Integer.valueOf(bufferedReader.readLine());
+					for(int j = 0; j<numOfChecking; j++) {
+						acctH.addCheckingAccount(CheckingAccount.readFromString(bufferedReader.readLine()));				
+					}
+				int numOfSavings = Integer.valueOf(bufferedReader.readLine());
+					for(int k = 0; k<numOfSavings; k++) {
+						acctH.addSavingsAccount(SavingsAccount.readFromString(bufferedReader.readLine()));				
+					}
+				int numOfCD = Integer.valueOf(bufferedReader.readLine());
+					for(int m = 0; m<numOfCD; m++) {
+						acctH.addCDAccount(CDAccount.readFromString(bufferedReader.readLine()));				
+					}
+				MeritBank.addAccountHolder(acctH);
+					
 			}
 			reader.close();
+			return true;
 		}
-		catch(IOException e) {
+		catch (FileNotFoundException e) {
 			e.printStackTrace();
+			return false;
 		}
-		return true;
+		catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		catch (ParseException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 	static boolean writeToFile( String fileName) {
 		try {
-			PrintWriter writer = new PrintWriter(fileName);
-			writer.println();//Pass in something
-			writer.close();
+		FileWriter writer = new FileWriter(fileName);
+		BufferedWriter bufferedWriter = new BufferedWriter ( writer);
+		bufferedWriter.write(String.valueOf(nextAccountNumber));
+		bufferedWriter.newLine();
+		
+		bufferedWriter.write(String.valueOf(CDOfferingsArray.length));
+		bufferedWriter.newLine();
+			for(int i = 0; i<CDOfferingsArray.length;i++) {
+				bufferedWriter.write(CDOfferingsArray[i].writeToString());
+				bufferedWriter.newLine();
+			}
+			
+		bufferedWriter.write(String.valueOf(AccountHoldersArray.length));
+		bufferedWriter.newLine();
+			for(int j = 0; j <AccountHoldersArray.length;j++) {
+				bufferedWriter.write(AccountHoldersArray[j].writeToString());
+				bufferedWriter.newLine();
+				bufferedWriter.write(String.valueOf(AccountHoldersArray[j].getCheckingAccounts().length));
+				bufferedWriter.newLine();
+					for(int k = 0; k < AccountHoldersArray[j].getCheckingAccounts().length;k++) {
+							bufferedWriter.write(AccountHoldersArray[j].getCheckingAccounts()[k].writeToString());
+							bufferedWriter.newLine();
+					}
+				bufferedWriter.write(String.valueOf(AccountHoldersArray[j].getSavingsAccounts().length));
+				bufferedWriter.newLine();
+					for(int m = 0; m < AccountHoldersArray[j].getSavingsAccounts().length;m++) {
+							bufferedWriter.write(AccountHoldersArray[j].getSavingsAccounts()[m].writeToString());
+							bufferedWriter.newLine();
+					}
+				bufferedWriter.write(String.valueOf(AccountHoldersArray[j].getCDAccounts().length));
+				bufferedWriter.newLine();
+					for(int n = 0; n < AccountHoldersArray[j].getCDAccounts().length;n++) {
+							bufferedWriter.write(AccountHoldersArray[j].getCDAccounts()[n].writeToString());
+							bufferedWriter.newLine();
+					}			
+			}
+			return true;
 		}
-		catch(FileNotFoundException e){
-			e.printStackTrace();
+		catch (Exception e) {
+			return false;
 		}
-		return true;
 	}
 	static AccountHolder[] sortAccountHolders() {
 		Arrays.sort(AccountHoldersArray);

@@ -1,6 +1,11 @@
 package com.meritamerica.assignment3;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 //Comeback and double check if implements is needed
-abstract class AccountHolder implements Comparable<AccountHolder> {
+ class AccountHolder  {
 	
 	// Class variables
 	private String firstName;
@@ -157,7 +162,6 @@ abstract class AccountHolder implements Comparable<AccountHolder> {
 	public double getCombinedBalance() {
 		return getCDBalance() + getSavingsBalance() + getCheckingBalance();
 	}
-	@Override
 	public int  compareTo(AccountHolder account) {
 		int sum1 = (int) getCombinedBalance();
 		int sum2 = (int) account.getCombinedBalance();
@@ -203,6 +207,31 @@ abstract class AccountHolder implements Comparable<AccountHolder> {
 	public int getNumberOfCheckingAccounts() {
 		return checkingArray.length;
 	}
+	public String writeToString() {
+    	StringBuilder accountHolderData = new StringBuilder();
+    	accountHolderData.append(firstName).append(",");
+    	accountHolderData.append(middleName).append(",");
+    	accountHolderData.append(lastName).append(",");
+    	accountHolderData.append(ssn);
+    	return accountHolderData.toString();
+    }
+	 public static AccountHolder readFromString(String accountHolderData)throws NumberFormatException {
+	    	try {
+	    		String [] holding = accountHolderData.split(",");
+	    		//[0] is firstName, [1] is middleName, [2] is lastName, [3] is SSN
+	    		AccountHolder newAcctHLD = new AccountHolder(String.valueOf(holding[0]),String.valueOf(holding[1]),
+	    				String.valueOf(holding[2]),String.valueOf(holding[3]));
+	    		return newAcctHLD;
+	    		
+	   
+	    	}
+	    	catch(NumberFormatException e) {
+	    		e.printStackTrace();
+	    		return null;
+	    	}
+			
+	    }
+	
 
 	
 	
