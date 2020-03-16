@@ -8,8 +8,8 @@ class CDAccount extends BankAccount {
 	CDOffering offering;
 	private int term;
 	Date date;
-	private double balance;
-	private long accountNumber;
+	//private double balance;
+	//private long accountNumber;
 		
 	/*public CDAccount(CDOffering offering, double openBalance){
 		super(offering, openBalance);
@@ -26,33 +26,24 @@ class CDAccount extends BankAccount {
 		this.term = offering.getTerm();
 	}
 	
-	public CDAccount(long accountNumber, double balance, double interestRate,Date accountOpenedOn, int term) {
+	public CDAccount(long accountNumber, double balance, double interestRate, Date accountOpenedOn, int term) {
 		super(accountNumber, balance,interestRate,accountOpenedOn);
 		this.term = term;
 	}
 	
-	public double getBalance() {
-		return balance;
-	}
-	
-	public double getInterestRate() {
-		return offering.getInterestRate();
-	}
 	
 	public int getTerm() {
-		return offering.getTerm();
+		return this.getTerm();
 	}
 	
 	public Date getStartDate(){
 		return date;
 	}
 	
-	public long getAccountNumber() {
-		return accountNumber;	
-	}
+
 	
 	public double futureValue() {
-		return futureValue(term);
+		return super.futureValue(term);
 	}
 	
 	@Override
@@ -68,7 +59,7 @@ class CDAccount extends BankAccount {
     	
     	//try {
     		String [] holding = accountData.split(",");
-    		SimpleDateFormat date = new SimpleDateFormat("dd/mm/yyyy");//.parse(holding[3]);
+    		SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");//.parse(holding[3]);
     		//[0] is accountNumber, [1] is balance, [2] is interestRate, date is [3] which is SimpleDate, [4] is term
     		//CDAccount newCDAcct = new CDAccount(Long.valueOf(holding[0]),Double.valueOf(holding[1]),Double.valueOf(holding[2]),
     			//	date, Integer.valueOf(holding[4]));
@@ -83,7 +74,8 @@ class CDAccount extends BankAccount {
     		System.out.println("RFT-CD -- account opened on " +accountOpenedOn);
     		int term = Integer.parseInt(holding[4]);
     		System.out.println("RFT-CD -- term " +term);
-    		return new CDAccount(accountNumber,balance,interestRate,accountOpenedOn,term);
+    		CDAccount newCDAccount = new CDAccount(accountNumber,balance,interestRate,accountOpenedOn,term);
+    		return newCDAccount;
     		
     	//}
     	/*catch(ParseException  e) {

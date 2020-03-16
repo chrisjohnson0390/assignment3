@@ -4,36 +4,29 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 	public  class  BankAccount {
-	    private static double balance;
-	    private static double interestRate;
-	    private static Date accountOpenedOn;
-	    static long  accountNumber;
+	    double balance;
+	    double interestRate;
+	    Date accountOpenedOn;
+	    long  accountNumber;
 	
 	
 	    public BankAccount(double balance, double interestRate) {
 	        this.balance = balance;
 	        this.interestRate = interestRate;
-	        this.accountOpenedOn = null;
+	        this.accountOpenedOn = new Date();
+	        this.accountNumber = MeritBank.getNextAccountNumber();
 	    }
 	    
 	    BankAccount(double balance, double interestRate, Date accountOpenedOn){
-	    	this.balance = balance;
-	    	this.interestRate = interestRate;
+	    	this(balance, interestRate);
 	    	this.accountOpenedOn = accountOpenedOn;
 	    }
 	    
-	   public BankAccount(long accountNumber, double balance, double interestRate, 
-	    		Date accountOpenedOn){
+	    public BankAccount(long accountNumber, double balance, double interestRate, Date accountOpenedOn){
+	    	this(balance, interestRate, accountOpenedOn);
 	    	this.accountNumber = accountNumber;
-	    	this.balance = balance;
-	    	this.interestRate = interestRate;
-	    	this.accountOpenedOn = accountOpenedOn;
 	    }
-	    //CD account was throwing an error, created an extra constructor.
-	    public BankAccount(CDOffering offering, double openBalance) {
-			// TODO Auto-generated constructor stub
-		}
-
+	   
 		public long getAccountNumber() {
 	        return accountNumber;
 	    }

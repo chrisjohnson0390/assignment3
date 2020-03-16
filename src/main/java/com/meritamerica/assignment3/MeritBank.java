@@ -14,9 +14,6 @@ class MeritBank {
 	private static long nextAccountNumber = 84920570;
 	private static AccountHolder AccountHoldersArray[] = new AccountHolder[0];
 	private static CDOffering CDOfferingsArray[] = new CDOffering[0];
-	//String fileName = "src/Main/MeritBank.txt";
-	//String fileName = "src/test/testMeritBank_bad.txt";
-	//String fileName = "src/test/testMeritBank_good.txt";
 
 	public static void addAccountHolder(AccountHolder accountHolder) {
 		AccountHolder[] newAccountHolderArray = new AccountHolder[AccountHoldersArray.length+1];
@@ -97,13 +94,12 @@ class MeritBank {
 	
 	static boolean readFromFile( String fileName) {
 		CDOffering offering[] = new CDOffering[0];
-		setNextAccountNumber(0);
-		//AccountHolder holder[] = new AccountHolder[0];
 		
 	try {
 			FileReader reader = new FileReader (fileName);
 			BufferedReader bufferedReader = new BufferedReader(reader);
-			setNextAccountNumber(Long.valueOf(bufferedReader.readLine()));
+			Long nextAccountNumber = Long.valueOf(bufferedReader.readLine());
+			
 			int holdOfferNum = Integer.valueOf(bufferedReader.readLine());
 			
 			for(int i = 0; i < holdOfferNum; i++) {
@@ -132,6 +128,8 @@ class MeritBank {
 				MeritBank.addAccountHolder(acctH);
 					
 			}
+			setNextAccountNumber(nextAccountNumber);
+			CDOfferingsArray = offering;
 			reader.close();
 			return true;
 		}
@@ -144,6 +142,10 @@ class MeritBank {
 			return false;
 		}
 		catch (ParseException e) {
+			e.printStackTrace();
+			return false;
+		}
+		catch (NumberFormatException e) {
 			e.printStackTrace();
 			return false;
 		}

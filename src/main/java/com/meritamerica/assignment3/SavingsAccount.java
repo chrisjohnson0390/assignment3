@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 class SavingsAccount extends BankAccount {
 	private double balance;
-	private final double INTEREST_RATE = 0.01;
+	public static final double INTEREST_RATE = 0.01;
 	private long acountNumber;
 	
 	public SavingsAccount(double openBalance, double interestRate){

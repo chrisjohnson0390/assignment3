@@ -10,7 +10,7 @@ package com.meritamerica.assignment3;
 	private String middleName;
 	private String lastName;
 	private String ssn;
-	private double interestRate;
+	//private double interestRate;
 	CheckingAccount[] checkingArray = new CheckingAccount[0];
 	SavingsAccount[] savingsArray = new SavingsAccount[0];
 	CDAccount[] cdAccountArray = new CDAccount[0];
@@ -32,7 +32,7 @@ package com.meritamerica.assignment3;
 			return null;
 		}
 		
-		CheckingAccount newA = new CheckingAccount(openBalance, interestRate);
+		CheckingAccount newA = new CheckingAccount(openBalance, CheckingAccount.INTEREST_RATE);
 		CheckingAccount[] newCheckingArray = new CheckingAccount[checkingArray.length+1];
 		for (int i = 0; i < newCheckingArray.length - 1; i++) {
 			newCheckingArray[i] = checkingArray[i];
@@ -85,7 +85,7 @@ package com.meritamerica.assignment3;
 			System.out.println("Cannot open a new Savings Account because aggregate balance of accounts is to high.");
 			return null;
 		}	//Interest Rate is being called inside Account Holder Class ?
-			SavingsAccount newA = new SavingsAccount(openBalance, interestRate);
+			SavingsAccount newA = new SavingsAccount(openBalance, SavingsAccount.INTEREST_RATE);
 			SavingsAccount[] newSavingsArray = new SavingsAccount[savingsArray.length+1];
 			for (int i = 0; i < newSavingsArray.length-1; i++) {
 				newSavingsArray[i] = savingsArray[i];
