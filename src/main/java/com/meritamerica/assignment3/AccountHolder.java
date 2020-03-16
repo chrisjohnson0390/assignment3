@@ -248,11 +248,11 @@ package com.meritamerica.assignment3;
 			
 	}*/
 	 public static AccountHolder readFromString(String accountHolderData) {
-	    	String[] data = accountHolderData.split(",");
-	    	String firstName = data[0];
-	    	String middleName = data[1];
-	    	String lastName = data[2];
-	    	String ssn = data[3];
+	    	String[] holding = accountHolderData.split(",");
+	    	String firstName = holding[0];
+	    	String middleName = holding[1];
+	    	String lastName = holding[2];
+	    	String ssn = holding[3];
 	    	
 	    	return new AccountHolder(firstName, middleName, lastName, ssn);
 	    }
