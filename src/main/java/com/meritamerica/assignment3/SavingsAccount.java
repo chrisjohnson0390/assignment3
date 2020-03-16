@@ -4,31 +4,20 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 class SavingsAccount extends BankAccount {
-	private double balance;
+	//private double balance;
 	public static final double INTEREST_RATE = 0.01;
-	private long acountNumber;
+	//private long acountNumber;
 	
 	public SavingsAccount(double openBalance, double interestRate){
 		super(openBalance, interestRate);
-		this.balance = openBalance;
-		this.acountNumber = MeritBank.getNextAccountNumber();
+		
 	}
 	
 	public SavingsAccount ( long accountNumber, double openBalance, double interestRate, Date accountOpenedOn) {
 		super(accountNumber, openBalance, interestRate, accountOpenedOn);
 	}
 	
-	public double getBalance() {
-		return balance;
-	}
-	
-	public double getInterestRate() {
-		return INTEREST_RATE;
-	}
-	
-	public long getAccountNumber() {
-		return acountNumber;
-	}
+
 	
 	/*public boolean withdraw(double amount) {
 		if(amount <= balance && amount > 0) {
@@ -40,19 +29,8 @@ class SavingsAccount extends BankAccount {
 		return false;
 	}*/
 	
-	public boolean deposit(double amount) {
-		if (amount > 0) {
-			this.balance = balance + amount;
-			System.out.println("Deposited amount: $" + amount);
-			System.out.println("Total balance: $" + balance);
-			return true;
-		}
-		return false;	
-	}
 	
-	public double futureValue(int years) {
-		return balance*Math.pow(1 + INTEREST_RATE, years);
-	}
+	
 	
 	public String toString() {
 		return "Savings Account Balance: $" + balance + "\n" + 

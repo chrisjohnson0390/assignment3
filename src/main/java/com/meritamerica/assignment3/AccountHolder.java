@@ -256,5 +256,9 @@ package com.meritamerica.assignment3;
 	    	
 	    	return new AccountHolder(firstName, middleName, lastName, ssn);
 	    }
+		public String toString() {
+			return  "Combined Balance for Account Holder" + this.getCombinedBalance();
+			
+		}
 		
 }

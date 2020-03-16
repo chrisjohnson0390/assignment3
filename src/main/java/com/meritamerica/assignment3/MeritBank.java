@@ -107,7 +107,7 @@ class MeritBank {
 				offering [offering.length-1] = CDOffering.readFromString(bufferedReader.readLine());
 			}
 			int numOfAcctHld = Integer.valueOf(bufferedReader.readLine());
-			
+			AccountHolder [] newAccountHolders = new AccountHolder[numOfAcctHld];
 			for(int i = 0; i<numOfAcctHld; i++) {
 				//holder = Arrays.copyOf(holder, holder.length +1);
 				//holder [holder.length -1] = AccountHolder.readFromString(bufferedReader.readLine());
@@ -125,11 +125,12 @@ class MeritBank {
 					for(int m = 0; m<numOfCD; m++) {
 						acctH.addCDAccount(CDAccount.readFromString(bufferedReader.readLine()));				
 					}
-				MeritBank.addAccountHolder(acctH);
-					
+				//MeritBank.addAccountHolder(acctH);
+				newAccountHolders[i] = acctH;	
 			}
 			setNextAccountNumber(nextAccountNumber);
 			CDOfferingsArray = offering;
+			AccountHoldersArray = newAccountHolders;
 			reader.close();
 			return true;
 		}
@@ -199,6 +200,9 @@ class MeritBank {
 	}
 	static AccountHolder[] sortAccountHolders() {
 		Arrays.sort(AccountHoldersArray);
+		for(AccountHolder a : AccountHoldersArray) {
+			System.out.println(a);
+		}
 		return AccountHoldersArray;
 	}
 	static void setNextAccountNumber( long accountNumber) {
