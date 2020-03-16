@@ -98,10 +98,17 @@ import java.util.Date;
 	    public static BankAccount readFromString(String accountData)throws ParseException, NumberFormatException {
 	    	try {
 	    		String [] holding = accountData.split(",");
-	    		Date date = new SimpleDateFormat("dd/mm/yyyy").parse(holding[3]);
+	    		SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");//.parse(holding[3]);
 	    		//[0] is accountNumber, [1] is balance, [2] is interestRate, date is [3] which is SimpleDate
-	    		BankAccount newAcct = new BankAccount(Long.valueOf(holding[0]),Double.valueOf(holding[1]),Double.valueOf(holding[2]),date);
-	    		return newAcct;
+	    		//BankAccount newAcct = new BankAccount(Long.valueOf(holding[0]),Double.valueOf(holding[1]),Double.valueOf(holding[2]),date);
+	    		//return newAcct;
+	    		
+	    		 Long accountNumber = Long.parseLong(holding[0]);
+	             double balance = Double.parseDouble(holding[1]);
+	             double interestRate = Double.parseDouble(holding[2]);
+	             Date accountOpenedOn = date.parse(holding[3]);
+
+	             return new BankAccount(accountNumber, balance, interestRate, accountOpenedOn);
 	    		
 	    	}
 	    	catch(ParseException  e) {

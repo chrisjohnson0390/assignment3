@@ -68,7 +68,7 @@ class CDAccount extends BankAccount {
     	
     	//try {
     		String [] holding = accountData.split(",");
-    		SimpleDateFormat date = new SimpleDateFormat("dd/mm/yyyy");//.parse(holding[3]);
+    		SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");//.parse(holding[3]);
     		//[0] is accountNumber, [1] is balance, [2] is interestRate, date is [3] which is SimpleDate, [4] is term
     		//CDAccount newCDAcct = new CDAccount(Long.valueOf(holding[0]),Double.valueOf(holding[1]),Double.valueOf(holding[2]),
     			//	date, Integer.valueOf(holding[4]));
