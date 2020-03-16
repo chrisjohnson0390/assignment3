@@ -16,14 +16,14 @@ import java.util.Date;
 	        this.accountOpenedOn = null;
 	    }
 	    
-	    BankAccount(double balance, double interestRate, java.util.Date accountOpenedOn){
+	    BankAccount(double balance, double interestRate, Date accountOpenedOn){
 	    	this.balance = balance;
 	    	this.interestRate = interestRate;
 	    	this.accountOpenedOn = accountOpenedOn;
 	    }
 	    
 	   public BankAccount(long accountNumber, double balance, double interestRate, 
-	    		java.util.Date accountOpenedOn){
+	    		Date accountOpenedOn){
 	    	this.accountNumber = accountNumber;
 	    	this.balance = balance;
 	    	this.interestRate = interestRate;

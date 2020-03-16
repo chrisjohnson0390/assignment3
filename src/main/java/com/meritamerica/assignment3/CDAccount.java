@@ -74,10 +74,15 @@ class CDAccount extends BankAccount {
     			//	date, Integer.valueOf(holding[4]));
     		
     		long accountNumber = Long.parseLong(holding[0]);
+    		System.out.println("RFT-CD -- account number: " +accountNumber);
     		double balance = Double.parseDouble(holding[1]);
+    		System.out.println("RFT-CD -- balance: " +balance);
     		double interestRate = Double.parseDouble(holding[2]);
+    		System.out.println("RFT-CD -- interest rate: " +interestRate);
     		Date accountOpenedOn = date.parse(holding[3]);
+    		System.out.println("RFT-CD -- account opened on " +accountOpenedOn);
     		int term = Integer.parseInt(holding[4]);
+    		System.out.println("RFT-CD -- term " +term);
     		return new CDAccount(accountNumber,balance,interestRate,accountOpenedOn,term);
     		
     	//}

@@ -73,11 +73,15 @@ class CheckingAccount extends BankAccount {
     			//	Double.valueOf(holding[2]),date);
     		
     		long accountNumber = Long.parseLong(holding[0]);
+    		System.out.println("RFT-Checking -- account number: " +accountNumber);
     		double balance = Double.parseDouble(holding[1]);
+    		System.out.println("RFT-Checking -- balance: " +balance);
     		double interestRate = Double.parseDouble(holding[2]);
+    		System.out.println("RFT-Checking -- interest rate: " +interestRate);
     		Date accountOpenedOn = date.parse(holding[3]);
+    		System.out.println("RFT-Checking -- account opened on " +accountOpenedOn);
     		
-    		return new CheckingAccount(accountNumber, interestRate, interestRate, accountOpenedOn) ;
+    		return new CheckingAccount(accountNumber, balance, interestRate, accountOpenedOn) ;
     		
     	}
     	/*catch(ParseException  e) {

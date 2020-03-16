@@ -65,15 +65,23 @@ class SavingsAccount extends BankAccount {
 	public static SavingsAccount readFromString(String accountData)throws ParseException, NumberFormatException {
     	//try {
     		String [] holding = accountData.split(",");
-    		SimpleDateFormat date = new SimpleDateFormat("dd/mm/yyyy");//.parse(holding[3]);
+    		SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");//.parse(holding[3]);
     		//[0] is accountNumber, [1] is balance, [2] is interestRate, date is [3] which is SimpleDate
     		//SavingsAccount newSaveAcct = new SavingsAccount;//(Long.valueOf(holding[0]),Double.valueOf(holding[1]),Double.valueOf(holding[2]), date);
     		long accountNumber = Long.parseLong(holding[0]);
+    		System.out.println("RFT-Savings -- account number: " +accountNumber);
     		double balance = Double.parseDouble(holding[1]);
+    		System.out.println("RFT-Savings -- balance: " +balance);
     		double interestRate = Double.parseDouble(holding[2]);
+    		System.out.println("RFT-Savings -- interest rate: " +interestRate);
     		Date accountOpenedOn = date.parse(holding[3]);
+    		System.out.println("RFT-Savings -- account opened on " +accountOpenedOn);
     		
-    		return new SavingsAccount(accountNumber, interestRate, interestRate, accountOpenedOn) ;
+    		
+    		//SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+        	//Date date = dateFormatter.parse("01/01/2020");
+    		
+    		return new SavingsAccount(accountNumber, balance, interestRate, accountOpenedOn);
     	/*}
     	catch(ParseException  e) {
     		e.printStackTrace();
