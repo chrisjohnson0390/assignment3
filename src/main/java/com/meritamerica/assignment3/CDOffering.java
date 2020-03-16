@@ -31,7 +31,7 @@ class CDOffering {
     		double intRate =Double.valueOf(holding[1]);
     		CDOffering CDOff = new CDOffering(term, intRate);
     		return CDOff;*/
-    		static CDOffering readFromString(String cdOfferingDataString) {
+    		public static CDOffering readFromString(String cdOfferingDataString) {
     			String[] holding = cdOfferingDataString.split(",");
     			int term = Integer.parseInt(holding[0]);
     			double interestRate = Double.parseDouble(holding[1]);

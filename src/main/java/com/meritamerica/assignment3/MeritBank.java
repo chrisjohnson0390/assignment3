@@ -147,6 +147,10 @@ class MeritBank {
 			e.printStackTrace();
 			return false;
 		}
+		catch (NumberFormatException e) {
+			e.printStackTrace();
+			return false;
+		}
 		
 	}
 	static boolean writeToFile( String fileName)  {

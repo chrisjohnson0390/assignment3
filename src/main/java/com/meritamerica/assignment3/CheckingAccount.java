@@ -63,11 +63,11 @@ class CheckingAccount extends BankAccount {
 		
 	}
 	//Still need the readFromString
-	public static CheckingAccount readFromString(String accountData)throws ParseException//, NumberFormatException//, ArrayIndexOutOfBoundsException// 
+	public static CheckingAccount readFromString(String accountData)throws ParseException{ //NumberFormatException//, ArrayIndexOutOfBoundsException// 
 	{
     	//try {
     		String [] holding = accountData.split(",");
-    		SimpleDateFormat date = new SimpleDateFormat("dd/mm/yyyy");//.parse(holding[3]);
+    		SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");//.parse(holding[3]);
     		//[0] is accountNumber, [1] is balance, [2] is interestRate, date is [3] which is SimpleDate
     		//CheckingAccount newCheckAcct = new CheckingAccount(Long.valueOf(holding[0]),Double.valueOf(holding[1]),
     			//	Double.valueOf(holding[2]),date);
@@ -77,9 +77,12 @@ class CheckingAccount extends BankAccount {
     		double interestRate = Double.parseDouble(holding[2]);
     		Date accountOpenedOn = date.parse(holding[3]);
     		
-    		return new CheckingAccount(accountNumber, interestRate, interestRate, accountOpenedOn) ;
+    		return new CheckingAccount(accountNumber, balance, interestRate, accountOpenedOn) ;
+    		
     		
     	}
+    	
+    	
     	/*catch(ParseException  e) {
     		e.printStackTrace();
     		return null;
@@ -96,6 +99,7 @@ class CheckingAccount extends BankAccount {
     		e.printStackTrace();
     		return null;
     	}*/
+	}
 	}
 	
 //}
