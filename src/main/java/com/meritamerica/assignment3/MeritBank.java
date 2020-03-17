@@ -5,10 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.io.BufferedReader;
+
 class MeritBank {
 	
 	private static long nextAccountNumber = 84920570;
@@ -17,9 +17,9 @@ class MeritBank {
 
 	public static void addAccountHolder(AccountHolder accountHolder) {
 		AccountHolder[] newAccountHolderArray = new AccountHolder[AccountHoldersArray.length+1];
-		for (int i = 0; i < newAccountHolderArray.length-1; i++) {
-			newAccountHolderArray[i] = AccountHoldersArray[i];
-		}
+			for (int i = 0; i < newAccountHolderArray.length-1; i++) {
+				newAccountHolderArray[i] = AccountHoldersArray[i];
+			}
 		AccountHoldersArray = newAccountHolderArray;
 		AccountHoldersArray[AccountHoldersArray.length-1] = accountHolder;
 	}
@@ -38,12 +38,12 @@ class MeritBank {
 		if(CDOfferingsArray == null) {
 			return null;
 		}
-		for(CDOffering offering :  CDOfferingsArray) {
-			if(futureValue(depositAmount, offering.getInterestRate(), offering.getTerm()) > best) {
-				bestOffering = offering;
-				best = futureValue(depositAmount, offering.getInterestRate(), offering.getTerm());
+			for(CDOffering offering :  CDOfferingsArray) {
+				if(futureValue(depositAmount, offering.getInterestRate(), offering.getTerm()) > best) {
+					bestOffering = offering;
+					best = futureValue(depositAmount, offering.getInterestRate(), offering.getTerm());
+				}
 			}
-		}
 		return bestOffering;
 	}
 
@@ -51,17 +51,17 @@ class MeritBank {
 		if(CDOfferingsArray == null) {
 			return null;
 		}
-		CDOffering bestOffering = null;
-		double best = 0.0; 
-		CDOffering secondBestOffering = null;
+			CDOffering bestOffering = null;
+			double best = 0.0; 
+			CDOffering secondBestOffering = null;
 		
-		for(CDOffering offering :  CDOfferingsArray) {
-			if(futureValue(depositAmount, offering.getInterestRate(), offering.getTerm()) > best) {
-				secondBestOffering = bestOffering;
-				bestOffering = offering;
-				best = futureValue(depositAmount, offering.getInterestRate(), offering.getTerm());
-			}
-		}
+				for(CDOffering offering :  CDOfferingsArray) {
+					if(futureValue(depositAmount, offering.getInterestRate(), offering.getTerm()) > best) {
+						secondBestOffering = bestOffering;
+						bestOffering = offering;
+						best = futureValue(depositAmount, offering.getInterestRate(), offering.getTerm());
+					}
+				}
 		return secondBestOffering;
 	}
 
@@ -79,9 +79,9 @@ class MeritBank {
 
 	public static double totalBalances() {
 		double total = 0.0;
-		for(AccountHolder accounts : AccountHoldersArray) {
-			total += accounts.getCombinedBalance();
-		}
+			for(AccountHolder accounts : AccountHoldersArray) {
+				total += accounts.getCombinedBalance();
+			}
 		System.out.println("Total aggregate account balance: $" + total);
 		return total;
 		
@@ -93,25 +93,19 @@ class MeritBank {
 	}
 	
 	static boolean readFromFile( String fileName) {
-		CDOffering offering[] = new CDOffering[0];
-		
-	try {
+		CDOffering offering[] = new CDOffering[0];	
+		try {
 			FileReader reader = new FileReader (fileName);
 			BufferedReader bufferedReader = new BufferedReader(reader);
 			Long nextAccountNumber = Long.valueOf(bufferedReader.readLine());
-			
 			int holdOfferNum = Integer.valueOf(bufferedReader.readLine());
-			
-			for(int i = 0; i < holdOfferNum; i++) {
-				offering = Arrays.copyOf(offering, offering.length + 1);
-				offering [offering.length-1] = CDOffering.readFromString(bufferedReader.readLine());
-			}
+				for(int i = 0; i < holdOfferNum; i++) {
+					offering = Arrays.copyOf(offering, offering.length + 1);
+					offering [offering.length-1] = CDOffering.readFromString(bufferedReader.readLine());
+				}
 			int numOfAcctHld = Integer.valueOf(bufferedReader.readLine());
 			AccountHolder [] newAccountHolders = new AccountHolder[numOfAcctHld];
-			for(int i = 0; i<numOfAcctHld; i++) {
-				//holder = Arrays.copyOf(holder, holder.length +1);
-				//holder [holder.length -1] = AccountHolder.readFromString(bufferedReader.readLine());
-				
+			for(int i = 0; i<numOfAcctHld; i++) {				
 				AccountHolder acctH = AccountHolder.readFromString(bufferedReader.readLine());
 				int numOfChecking = Integer.valueOf(bufferedReader.readLine());
 					for(int j = 0; j<numOfChecking; j++) {
@@ -125,7 +119,6 @@ class MeritBank {
 					for(int m = 0; m<numOfCD; m++) {
 						acctH.addCDAccount(CDAccount.readFromString(bufferedReader.readLine()));				
 					}
-				//MeritBank.addAccountHolder(acctH);
 				newAccountHolders[i] = acctH;	
 			}
 			setNextAccountNumber(nextAccountNumber);
@@ -152,13 +145,13 @@ class MeritBank {
 		}
 		
 	}
+	
 	static boolean writeToFile( String fileName)  {
 		try {
 		FileWriter writer = new FileWriter(fileName);
-		BufferedWriter bufferedWriter = new BufferedWriter ( writer);
+		BufferedWriter bufferedWriter = new BufferedWriter(writer);
 		bufferedWriter.write(String.valueOf(nextAccountNumber));
 		bufferedWriter.newLine();
-		
 		bufferedWriter.write(String.valueOf(CDOfferingsArray.length));
 		bufferedWriter.newLine();
 			for(int i = 0; i<CDOfferingsArray.length;i++) {
@@ -198,17 +191,17 @@ class MeritBank {
 		}
 	
 	}
+	
 	static AccountHolder[] sortAccountHolders() {
 		Arrays.sort(AccountHoldersArray);
-		for(AccountHolder a : AccountHoldersArray) {
-			System.out.println(a);
-		}
+			for(AccountHolder a : AccountHoldersArray) {
+				System.out.println(a);
+			}
 		return AccountHoldersArray;
 	}
+	
 	static void setNextAccountNumber( long accountNumber) {
 		nextAccountNumber = accountNumber;
 		
 	}
-	
-
 }

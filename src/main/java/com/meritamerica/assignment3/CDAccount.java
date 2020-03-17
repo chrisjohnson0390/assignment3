@@ -3,22 +3,12 @@ package com.meritamerica.assignment3;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 class CDAccount extends BankAccount {
 	
 	CDOffering offering;
 	private int term;
 	Date date;
-	//private double balance;
-	//private long accountNumber;
-		
-	/*public CDAccount(CDOffering offering, double openBalance){
-		super(offering, openBalance);
-		this.date = new Date();
-		this.offering = offering;
-		this.balance = openBalance;
-		this.accountNumber = MeritBank.getNextAccountNumber();
-	}*/
-	
 	
 	public CDAccount(CDOffering offering, double openBalance) {
 		super(openBalance,offering.getInterestRate());
@@ -31,7 +21,6 @@ class CDAccount extends BankAccount {
 		this.term = term;
 	}
 	
-	
 	public int getTerm() {
 		return this.term;
 	}
@@ -40,8 +29,6 @@ class CDAccount extends BankAccount {
 		return date;
 	}
 	
-
-	
 	public double futureValue() {
 		return super.futureValue(term);
 	}
@@ -49,45 +36,23 @@ class CDAccount extends BankAccount {
 	@Override
 	public boolean withdraw(double amount) {
         return false;
-        }
+    }
     
     public boolean deposit(double amount) {
-     return false;
+    	return false;
     }
     
     public static CDAccount readFromString(String accountData)throws ParseException, NumberFormatException {
-    	
-    	//try {
-    		String [] holding = accountData.split(",");
-    		SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");//.parse(holding[3]);
-    		//[0] is accountNumber, [1] is balance, [2] is interestRate, date is [3] which is SimpleDate, [4] is term
-    		//CDAccount newCDAcct = new CDAccount(Long.valueOf(holding[0]),Double.valueOf(holding[1]),Double.valueOf(holding[2]),
-    			//	date, Integer.valueOf(holding[4]));
-    		
-    		long accountNumber = Long.parseLong(holding[0]);
-    		System.out.println("RFT-CD -- account number: " +accountNumber);
-    		double balance = Double.parseDouble(holding[1]);
-    		System.out.println("RFT-CD -- balance: " +balance);
-    		double interestRate = Double.parseDouble(holding[2]);
-    		System.out.println("RFT-CD -- interest rate: " +interestRate);
-    		Date accountOpenedOn = date.parse(holding[3]);
-    		System.out.println("RFT-CD -- account opened on " +accountOpenedOn);
-    		int term = Integer.parseInt(holding[4]);
-    		System.out.println("RFT-CD -- term " +term);
-    		CDAccount newCDAccount = new CDAccount(accountNumber,balance,interestRate,accountOpenedOn,term);
-    		return newCDAccount;
-    		
-    	//}
-    	/*catch(ParseException  e) {
-    		e.printStackTrace();
-    		return null;
-    	}
-    	catch(NumberFormatException e) {
-    		e.printStackTrace();
-    		return null;
-    	}*/
-    	
-		
+    	String [] holding = accountData.split(",");
+    	SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+    	//[0] is accountNumber, [1] is balance, [2] is interestRate, date is [3] which is SimpleDate, [4] is term
+    	long accountNumber = Long.parseLong(holding[0]);
+    	double balance = Double.parseDouble(holding[1]);
+    	double interestRate = Double.parseDouble(holding[2]);
+    	Date accountOpenedOn = date.parse(holding[3]);
+    	int term = Integer.parseInt(holding[4]);
+    	CDAccount newCDAccount = new CDAccount(accountNumber,balance,interestRate,accountOpenedOn,term);
+    	return newCDAccount;
     }
     
     public String writeToString() {
